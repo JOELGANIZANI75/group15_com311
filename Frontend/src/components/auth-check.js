@@ -120,7 +120,7 @@ const SignUp = () => {
               <input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
-                placeholder="Enter Password"
+                placeholder="Password"
                 value={form.password}
                 onChange={handleChange}
                 required
