@@ -139,7 +139,7 @@ const SignUp = () => {
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 name="confirmPassword"
-                placeholder="Confirm Password"
+                placeholder="Confirm"
                 value={form.confirmPassword}
                 onChange={handleChange}
                 required
