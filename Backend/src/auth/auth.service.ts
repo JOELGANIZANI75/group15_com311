@@ -21,7 +21,7 @@ export class AuthService {
       FirstName: user.FirstName,
       SurName: user.SurName,
       sub: user.id, // Common convention for unique identifier in JWT
-      profileImage: user.profileImage,
+      //profileImage: user.profileImage,
       University: user.University,
       RegNo: user.RegNo,
     };
