@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsString,IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreateUserDto {
     @IsString() // Change to number if RegNo is numeric in the database
