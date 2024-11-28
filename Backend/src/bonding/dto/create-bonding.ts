@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 
 export class CreateBonding {
-  
+  // Stage 1: Personal Details
   @IsString()
   @IsNotEmpty({ message: 'First name is required' })
   FirstName!: string;
@@ -49,7 +49,7 @@ export class CreateBonding {
   @IsNotEmpty({ message: 'National ID Number is required' })
   NationalIdNo!: string;
 
-  
+  // Stage 2: Parents/Guardian Details
   @IsString()
   @IsOptional()
   GuardianFullName?: string;
@@ -78,7 +78,7 @@ export class CreateBonding {
   @IsOptional()
   GuardianPhoneNumber?: number;
 
-  
+  // Stage 3: Bank Details
   @IsString()
   @IsOptional()
   BankName?: string;
@@ -95,16 +95,16 @@ export class CreateBonding {
   @IsOptional()
   AccountNumber?: number;
 
+  // Stage 4: Documentation
+  @IsString()
+  @IsOptional()
+  studentId?: string; // Path to the uploaded Student ID image
 
   @IsString()
   @IsOptional()
-  studentId?: string; 
+  nationalId?: string; // This would capture the file path or reference to the uploaded file.
 
-  @IsString()
-  @IsOptional()
-  nationalId?: string; 
-
- 
+  // Stage 5: Loan Amount Details
 
   @IsOptional()
   Tuition?: number;

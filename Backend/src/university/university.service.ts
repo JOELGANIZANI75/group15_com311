@@ -12,7 +12,10 @@ export class UniversityService {
     private readonly universityRepository: Repository<University>,
   ) {}
 
-  async createUniversity(userId: number, createUniversityDto: CreateUniversityDto): Promise<University> {
+  async createUniversity(
+    userId: number,
+    createUniversityDto: CreateUniversityDto,
+  ): Promise<University> {
     const university = this.universityRepository.create(createUniversityDto);
     return await this.universityRepository.save(university);
   }
@@ -22,14 +25,20 @@ export class UniversityService {
   }
 
   async getUniversityById(id: number): Promise<University> {
-    const university = await this.universityRepository.findOne({ where: { id }, relations: ['bondings'] });
+    const university = await this.universityRepository.findOne({
+      where: { id },
+      relations: ['bondings'],
+    });
     if (!university) {
       throw new NotFoundException(`University with ID ${id} not found`);
     }
     return university;
   }
 
-  async updateUniversity(id: number, updateUniversityDto: UpdateUniversityDto): Promise<University> {
+  async updateUniversity(
+    id: number,
+    updateUniversityDto: UpdateUniversityDto,
+  ): Promise<University> {
     const university = await this.getUniversityById(id);
     Object.assign(university, updateUniversityDto);
     return await this.universityRepository.save(university);

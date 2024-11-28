@@ -4,7 +4,6 @@ import { UniversityService } from './university.service';
 import { University } from './University.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-
 @Module({
   imports: [TypeOrmModule.forFeature([University])],
   controllers: [UniversityController],

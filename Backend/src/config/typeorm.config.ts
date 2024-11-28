@@ -1,9 +1,11 @@
-import { TypeOrmModuleOptions, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import {
+  TypeOrmModuleOptions,
+  TypeOrmModuleAsyncOptions,
+} from '@nestjs/typeorm';
 import { User } from '../users/Student.entity';
 import { Bonding } from '../bonding/bonding-entity';
 import { Eligible } from '../erigible/erigibility-entity';
-import {University} from '../university/University.entity';
-
+import { University } from '../university/University.entity';
 
 // Async TypeORM configuration using environment variables
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
@@ -28,10 +30,9 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       },
       synchronize: true, // Be cautious with this in production; use migrations instead
       logging: false,
-      connectTimeoutMS: 30000, 
+      connectTimeoutMS: 30000,
     };
   },
 };
 
 // Static TypeORM configuration
-

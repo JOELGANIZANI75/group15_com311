@@ -36,15 +36,23 @@ export class BondingController {
     }
 
     // Proceed with bonding if not already bonded
-    const university = await this.universityService.createUniversity(userId, universityData);
+    const university = await this.universityService.createUniversity(
+      userId,
+      universityData,
+    );
     createBondingDto.universityId = university.id;
 
-    const bonding = await this.bondingService.createBonding(createBondingDto, userId);
+    const bonding = await this.bondingService.createBonding(
+      createBondingDto,
+      userId,
+    );
     return bonding;
   }
 
   @Get('/user/:userId')
-  async getBondingByUserId(@Param('userId', ParseIntPipe) userId: number): Promise<Bonding[]> {
+  async getBondingByUserId(
+    @Param('userId', ParseIntPipe) userId: number,
+  ): Promise<Bonding[]> {
     return await this.bondingService.getBondingByUserId(userId);
   }
 
@@ -57,7 +65,9 @@ export class BondingController {
   }
 
   @Delete(':id')
-  async removeBonding(@Param('id', ParseIntPipe) id: number): Promise<Bonding | null> {
+  async removeBonding(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Bonding | null> {
     return await this.bondingService.removeBonding(id);
   }
 }

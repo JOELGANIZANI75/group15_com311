@@ -70,24 +70,24 @@ export class UsersService {
     imagePath?: string,
   ): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });
-  
+
     if (!user) {
       throw new NotFoundException('User not found');
     }
-  
+
     // Check if password is being updated and encrypt it
     if (updateUserDto.password) {
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(updateUserDto.password, salt);
       updateUserDto.password = hashedPassword;
     }
-  
+
     Object.assign(user, updateUserDto);
-  
+
     if (imagePath) {
       user.profileImage = imagePath;
     }
-  
+
     return await this.userRepository.save(user);
   }
   async removeUser(id: number): Promise<User> {
