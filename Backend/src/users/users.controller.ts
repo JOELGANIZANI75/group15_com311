@@ -49,7 +49,7 @@ export class UsersController {
     return await this.usersService.createUser(createUserDto);
   }
 
-  @Put(':id')
+/*  @Put(':id')
   @UseInterceptors(
     FileInterceptor('profileImage', {
       storage: diskStorage({
@@ -72,14 +72,14 @@ export class UsersController {
         }
       },
     }),
-  )
+  )*/
   async updateUser(
     @Param('id', ParseIntPipe) id: number,
     @Body(ValidationPipe) updateUserDto: UpdateUserDto,
-    @UploadedFile() file: Express.Multer.File,
+    //@UploadedFile() file: Express.Multer.File,
   ): Promise<User> {
-    const imagePath = file ? file.path : undefined;
-    return await this.usersService.updateUser(id, updateUserDto, imagePath);
+    //const imagePath = file ? file.path : undefined;
+    return await this.usersService.updateUser(id, updateUserDto);
   }
 
   @Delete(':id')
