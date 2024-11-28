@@ -1,4 +1,4 @@
-import { Column, BaseEntity, Entity, PrimaryGeneratedColumn, BeforeInsert, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Column, BaseEntity, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 //import * as bcrypt from 'bcrypt';
 import { Bonding } from '../bonding/bonding-entity';
 
