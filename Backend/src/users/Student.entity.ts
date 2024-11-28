@@ -57,8 +57,8 @@ export class User extends BaseEntity {
   @Column({ type: 'timestamp', nullable: true })
   resetPasswordExpires!: Date;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  profileImage?: string; // Path for profile image
+  //@Column({ type: 'varchar', length: 255, nullable: true })
+  //profileImage?: string; // Path for profile image
 
   @OneToMany(() => Bonding, (bonding) => bonding.user)
   bondings!: Bonding[];
