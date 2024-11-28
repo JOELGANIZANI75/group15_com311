@@ -47,7 +47,7 @@ const SignUp = () => {
 
     setLoading(true); // Set loading state
     try {
-      await axios.post(`http://localhost:3001/users/register`, form);
+      await axios.post(`https://group15-com311-r7mi-9aq3r51s6-joelganizani75s-projects.vercel.app/users/register`, form);
       setShowSuccessModal(true); // Open modal on success
     } catch (error) {
       console.error('Error creating account', error);
