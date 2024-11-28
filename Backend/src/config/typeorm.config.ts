@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { User } from '../users/Student.entity';
 import { Bonding } from '../bonding/bonding-entity';
-import { Eligible } from 'src/erigible/erigibility-entity';
+import { Eligible } from '../erigible/erigibility-entity';
 import {University} from '../university/University.entity';
 
 
