@@ -33,7 +33,7 @@ const LoginForm = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:3001/auth/login", {
+      const response = await axios.post("https://group15-com311-r7mi-9aq3r51s6-joelganizani75s-projects.vercel.app/auth/login", {
         email,
         password,
       });
