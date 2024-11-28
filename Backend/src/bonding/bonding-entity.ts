@@ -45,7 +45,7 @@ export class Bonding extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   PostalAddress!: string; // National ID
 
-  @IsString()
+ /* @IsString()
   @IsOptional()
   @Column({ type: 'varchar', length: 255, nullable: true })
   studentId?: string; // Path to the uploaded Student ID image
@@ -53,7 +53,7 @@ export class Bonding extends BaseEntity {
   @IsString()
   @IsOptional()
   @Column({ type: 'varchar', length: 255, nullable: true })
-  nationalId?: string; // Path or identifier of the uploaded document
+  nationalId?: string; // Path or identifier of the uploaded document*/
 
   @Column({ type: 'numeric', precision: 10, scale: 2 }) // Use numeric for amounts
   tuitionAmount!: number;
