@@ -64,11 +64,7 @@ export class UsersService {
     return savedUser;
   }
 
-  async updateUser(
-    id: number,
-    updateUserDto: UpdateUserDto,
-    imagePath?: string,
-  ): Promise<User> {
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
@@ -83,10 +79,6 @@ export class UsersService {
     }
 
     Object.assign(user, updateUserDto);
-
-    if (imagePath) {
-      user.profileImage = imagePath;
-    }
 
     return await this.userRepository.save(user);
   }
@@ -113,3 +105,4 @@ export class UsersService {
     return user;
   }
 }
+
