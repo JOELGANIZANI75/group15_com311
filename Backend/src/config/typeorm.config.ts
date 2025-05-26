@@ -10,17 +10,17 @@ import { University } from '../university/University.entity';
 // Async TypeORM configuration using environment variables
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
-    const dbPort = parseInt(process.env.DB_PORT || '5433', 10);
-    const dbHost = process.env.DB_HOST || 'localhost';
-    const dbUsername = process.env.DB_USERNAME || 'defaultUser';
+    const dbPort = parseInt(process.env.PORT || '5432', 10);
+    const dbHost = process.env.DB_HOST || 'db.fenqtctwywobpnvdmpqp.supabase.co';
+    const dbUsername = process.env.USER || 'defaultUser';
     const dbPassword = process.env.DB_PASSWORD || 'defaultPassword';
     const dbName = process.env.DB_NAME || 'defaultDB';
 
     return {
       type: 'postgres',
       host: dbHost,
-      port: dbPort,
-      username: dbUsername,
+      port: Port,
+      username: User,
       password: dbPassword,
       database: dbName,
       entities: [User, Bonding, Eligible, University],
