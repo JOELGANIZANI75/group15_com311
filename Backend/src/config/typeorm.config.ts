@@ -19,8 +19,8 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     return {
       type: 'postgres',
       host: dbHost,
-      port: Port,
-      username: User,
+      port: dbPort,
+      username: dbUsername,
       password: dbPassword,
       database: dbName,
       entities: [User, Bonding, Eligible, University],
