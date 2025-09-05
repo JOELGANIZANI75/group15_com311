@@ -9,7 +9,7 @@ dotenv.config();
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: process.env.HOST || 'db.fenqtctwywobpnvdmpqp.supabase.co',
+  host: process.env.HOST || 'localhost',
   port: parseInt(process.env.PORT || '5432', 10),
   username: process.env.USER || 'defaultUser',
   password: process.env.DB_PASSWORD || 'defaultPassword',
