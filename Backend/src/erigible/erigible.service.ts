@@ -12,7 +12,10 @@ export class ErigibleService {
     private eligibleRepository: Repository<Eligible>,
   ) {}
 
-  async checkEligibility(firstName: string, surName: string): Promise<{ isEligible: boolean }> {
+  async checkEligibility(
+    firstName: string,
+    surName: string,
+  ): Promise<{ isEligible: boolean }> {
     const student = await this.eligibleRepository.findOne({
       where: {
         FirstName: firstName,
@@ -27,7 +30,7 @@ export class ErigibleService {
 
     // Assuming you want to check against a predefined limit
     const predefinedTuitionLimit = 500000; // Example limit
-    const predefinedUpkeepLimit = 300000;   // Example limit
+    const predefinedUpkeepLimit = 300000; // Example limit
 
     // Check if the tuition and upkeep are within the limits
     const totalAmount = predefinedTuitionLimit + predefinedUpkeepLimit;
@@ -44,7 +47,7 @@ export class ErigibleService {
       SurName: createStudentDto.SurName,
       university: createStudentDto.university,
       tuition: createStudentDto.tuition, // Convert to number
-      upkeep: createStudentDto.upkeep,    // Convert to number
+      upkeep: createStudentDto.upkeep, // Convert to number
       total: total,
     });
 
@@ -66,9 +69,12 @@ export class ErigibleService {
   }
 
   // Update a student entry by ID
-  async updateStudent(id: number, updateStudentDto: UpdateDto): Promise<Eligible> {
+  async updateStudent(
+    id: number,
+    updateStudentDto: UpdateDto,
+  ): Promise<Eligible> {
     const student = await this.getStudentById(id); // Check if the student exists
-    Object.assign(student, updateStudentDto);      // Update the student details
+    Object.assign(student, updateStudentDto); // Update the student details
 
     return await this.eligibleRepository.save(student);
   }
@@ -76,7 +82,7 @@ export class ErigibleService {
   // Remove a student entry by ID
   async removeStudent(id: number): Promise<Eligible> {
     const student = await this.getStudentById(id); // Check if the student exists
-    await this.eligibleRepository.remove(student);  // Remove the student from the database
+    await this.eligibleRepository.remove(student); // Remove the student from the database
     return student; // Return the removed student
   }
 }

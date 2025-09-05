@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt'; // Import bcrypt for hashing
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './Student.entity';
@@ -33,14 +33,6 @@ export class UsersService {
     return user;
   }
 
-  async getUserByEmail(email: string): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { email } });
-    if (!user) {
-      throw new NotFoundException(`User with email ${email} not found`);
-    }
-    return user;
-  }
-
   async createUser(createUserDto: CreateUserDto): Promise<User> {
     const { password, confirmPassword, email } = createUserDto;
 
@@ -55,43 +47,41 @@ export class UsersService {
       throw new ConflictException('Email is already in use');
     }
 
+    // Hash the password
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Create a new user with the hashed password
     const user = this.userRepository.create({
       ...createUserDto,
       password: hashedPassword,
     });
+
     const savedUser = await this.userRepository.save(user);
 
     await this.emailService.sendWelcomeEmail(savedUser);
+
     return savedUser;
   }
 
-  async updateUserPassword(user: User): Promise<User> {
-    return await this.userRepository.save(user);
-  }
-
-  async updateUser(
-    id: number,
-    updateUserDto: UpdateUserDto,
-    imagePath?: string,
-  ): Promise<User> {
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
       throw new NotFoundException('User not found');
     }
 
-    Object.assign(user, updateUserDto);
-
-    if (imagePath) {
-      user.profileImage = imagePath;
+    // Check if password is being updated and encrypt it
+    if (updateUserDto.password) {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(updateUserDto.password, salt);
+      updateUserDto.password = hashedPassword;
     }
+
+    Object.assign(user, updateUserDto);
 
     return await this.userRepository.save(user);
   }
-
   async removeUser(id: number): Promise<User> {
     const user = await this.getUserById(id);
     await this.userRepository.remove(user);
@@ -115,3 +105,4 @@ export class UsersService {
     return user;
   }
 }
+
