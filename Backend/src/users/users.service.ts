@@ -11,14 +11,14 @@ import * as bcrypt from 'bcrypt'; // Import bcrypt for hashing
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './Student.entity';
-import { EmailService } from '../mailer/mailer.service';
+
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    private readonly emailService: EmailService,
+    
   ) {}
 
   async getAllUsers(): Promise<User[]> {
@@ -59,7 +59,6 @@ export class UsersService {
 
     const savedUser = await this.userRepository.save(user);
 
-    await this.emailService.sendWelcomeEmail(savedUser);
 
     return savedUser;
   }
