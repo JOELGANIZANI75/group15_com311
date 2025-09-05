@@ -10,7 +10,7 @@ import { UpdateBonding } from './dto/update-bonding';
 import { Bonding } from './bonding-entity';
 import { User } from '../users/Student.entity';
 import { University } from '../university/University.entity';
-import { EmailService } from '../mailer/mailer.service';
+
 
 @Injectable()
 export class BondingService {
@@ -19,7 +19,7 @@ export class BondingService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     @InjectRepository(University)
     private readonly universityRepository: Repository<University>,
-    private readonly emailService: EmailService,
+    
   ) {}
 
   async createBonding(
@@ -91,9 +91,7 @@ export class BondingService {
     }
     bonding.university = university;
 
-    if (user) {
-      await this.emailService.sendBondingSuccessEmail(user);
-    }
+   
 
     return await this.bondingRepository.save(bonding);
   }
