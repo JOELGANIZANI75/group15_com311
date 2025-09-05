@@ -11,7 +11,7 @@ import { University } from '../university/University.entity';
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
     const dbPort = parseInt(process.env.PORT || '5432', 10);
-    const dbHost = process.env.DB_HOST || 'db.fenqtctwywobpnvdmpqp.supabase.co';
+    const dbHost = process.env.DB_HOST || 'dpg-d2sq2cggjchc73alqr70-a';
     const dbUsername = process.env.USER || 'defaultUser';
     const dbPassword = process.env.DB_PASSWORD || 'defaultPassword';
     const dbName = process.env.DB_NAME || 'defaultDB';
