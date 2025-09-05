@@ -8,7 +8,7 @@ const Axio = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/data");
+        const response = await axios.get("https://group15-com31.onrender.com/api/data");
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data", error);
@@ -34,3 +34,4 @@ const Axio = () => {
 };
 
 export default Axio;
+
