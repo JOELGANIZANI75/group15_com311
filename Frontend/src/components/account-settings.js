@@ -57,7 +57,7 @@ const AccountSettings = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3001/users/${userId}`, formData, {
+      await axios.put(`https://group15-com31.onrender.com/users/${userId}`, formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -162,3 +162,4 @@ const AccountSettings = () => {
 };
 
 export default AccountSettings;
+
