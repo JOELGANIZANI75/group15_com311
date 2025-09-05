@@ -1,13 +1,7 @@
-import {
-  IsString,
-  IsNotEmpty,
-  IsInt,
-  IsNumber,
-  IsEnum,
-  IsOptional,
-} from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, IsDate,IsNumber, IsEnum, IsEmail, IsOptional, IsIn } from 'class-validator';
 
 export class CreateBonding {
+
   // Stage 1: Personal Details
   @IsString()
   @IsNotEmpty({ message: 'First name is required' })
@@ -45,7 +39,7 @@ export class CreateBonding {
   @IsNotEmpty({ message: 'postal is required' })
   PostalAddress!: string;
 
-  @IsString()
+  @IsString()  
   @IsNotEmpty({ message: 'National ID Number is required' })
   NationalIdNo!: string;
 
@@ -102,12 +96,13 @@ export class CreateBonding {
 
   @IsString()
   @IsOptional()
-  nationalId?: string; // This would capture the file path or reference to the uploaded file.
+  nationalId?: string;// This would capture the file path or reference to the uploaded file.
 
   // Stage 5: Loan Amount Details
 
   @IsOptional()
   Tuition?: number;
+
 
   @IsOptional()
   UpkeepAmount?: number;
@@ -115,4 +110,6 @@ export class CreateBonding {
   @IsNumber()
   @IsOptional()
   universityId?: number;
+
+ 
 }

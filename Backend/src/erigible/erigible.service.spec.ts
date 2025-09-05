@@ -6,20 +6,10 @@ describe('ErigibleService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        ErigibleService,
-        {
-          provide: 'EligibleRepository',  // Provide the repository (mock or real)
-          useValue: {
-            // Mock methods for EligibleRepository if needed
-            findOne: jest.fn(),  // Example mock for the `findOne` method
-            save: jest.fn(),     // Example mock for the `save` method
-          },
-        },
-      ],
+      providers: [ErigibleService],
     }).compile();
 
-    service = module.get<ErigibleService>(ErigibleService);  // Getting the ErigibleService instance
+    service = module.get<ErigibleService>(ErigibleService);
   });
 
   it('should be defined', () => {

@@ -1,5 +1,7 @@
-import { Repository } from 'typeorm';
-import { Bonding } from './bonding-entity';
+import { Repository } from "typeorm";
+import {Bonding} from './bonding-entity';
 
 //@EntityRepository(User)
-export class bondingRepository extends Repository<Bonding> {}
+export class bondingRepository extends Repository<Bonding>{
+
+}

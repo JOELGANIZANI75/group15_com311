@@ -1,12 +1,6 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  BaseEntity,
-  ManyToOne,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToOne } from 'typeorm';
 import { IsString, IsOptional } from 'class-validator';
-import { User } from '../users/Student.entity';
+import { User } from '../users/Student.entity'; 
 import { University } from '../university/University.entity';
 
 @Entity('bondings')
@@ -36,7 +30,7 @@ export class Bonding extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   TA!: string; // Traditional Authority
 
-  @Column({ type: 'varchar', length: 255 })
+ @Column({ type: 'varchar', length: 255 })
   NationalIdNo!: string; // National ID
 
   @Column({ type: 'varchar', length: 255 })
@@ -45,7 +39,7 @@ export class Bonding extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   PostalAddress!: string; // National ID
 
- /* @IsString()
+  @IsString()
   @IsOptional()
   @Column({ type: 'varchar', length: 255, nullable: true })
   studentId?: string; // Path to the uploaded Student ID image
@@ -53,13 +47,13 @@ export class Bonding extends BaseEntity {
   @IsString()
   @IsOptional()
   @Column({ type: 'varchar', length: 255, nullable: true })
-  nationalId?: string; // Path or identifier of the uploaded document*/
+  nationalId?: string; // Path or identifier of the uploaded document
 
   @Column({ type: 'numeric', precision: 10, scale: 2 }) // Use numeric for amounts
-  tuitionAmount!: number;
+tuitionAmount!: number;
 
-  @Column({ type: 'numeric', precision: 10, scale: 2 })
-  upkeepAmount!: number;
+@Column({ type: 'numeric', precision: 10, scale: 2 })
+upkeepAmount!: number;
 
   // Guardian Details
   @Column({ type: 'varchar', length: 255, nullable: true })
@@ -94,17 +88,11 @@ export class Bonding extends BaseEntity {
   accountName?: string; // Account name
 
   @Column({ type: 'bigint', nullable: true })
-  accountNumber?: number;
+accountNumber?: number;
 
-  @ManyToOne(() => University, (university) => university.bondings, {
-    onDelete: 'CASCADE',
-    eager: true,
-  })
+  @ManyToOne(() => University, (university) => university.bondings, { onDelete: 'CASCADE', eager: true }) 
   university!: University;
-
-  @ManyToOne(() => User, (user) => user.bondings, {
-    onDelete: 'CASCADE',
-    eager: true,
-  })
-  user!: User;
+  
+  @ManyToOne(() => User, (user) => user.bondings, { onDelete: 'CASCADE', eager: true })
+    user!: User;
 }

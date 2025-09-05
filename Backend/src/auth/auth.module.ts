@@ -10,7 +10,7 @@ import { AuthController } from './auth.controller';
     forwardRef(() => UsersModule), // Use forwardRef to avoid circular dependency
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET, // Ensure this is set correctly in your environment
+      secret: process.env.JWT_SECRET,  // Ensure this is set correctly in your environment
       signOptions: { expiresIn: '30min' }, // Token expiry time
     }),
   ],

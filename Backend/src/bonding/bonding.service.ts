@@ -36,7 +36,7 @@ export class BondingService {
 
       const bonding = this.bondingRepository.create({
         ...createBondingDto,
-        user,
+        user: user || undefined,
       });
 
       const existingBonding = await this.bondingRepository.findOne({
@@ -47,8 +47,6 @@ export class BondingService {
           `You have already completed the bonding process.`,
         );
       }
-
-      await this.bondingRepository.save(bonding); // Save the bonding instance
     }
 
     const bonding = this.bondingRepository.create({
@@ -64,8 +62,8 @@ export class BondingService {
       PostalAddress: createBondingDto.PostalAddress,
       phoneNumber: createBondingDto.PhoneNumber,
       homeVillage: createBondingDto.HomeVillage,
-     // nationalId: createBondingDto.nationalId,
-      //studentId: createBondingDto.studentId,
+      nationalId: createBondingDto.nationalId,
+      studentId: createBondingDto.studentId,
       tuitionAmount: createBondingDto.Tuition,
       upkeepAmount: createBondingDto.UpkeepAmount,
       guardianFullName: createBondingDto.GuardianFullName,

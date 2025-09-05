@@ -1,6 +1,7 @@
 import { IsString, IsNumber, IsNotEmpty, Min } from 'class-validator';
 
 export class CreateStudentDto {
+  
   @IsString()
   @IsNotEmpty({ message: 'First name is required' })
   FirstName!: string;
@@ -20,4 +21,6 @@ export class CreateStudentDto {
   @IsNumber()
   @Min(0, { message: 'Upkeep must be a positive number' })
   upkeep!: number;
+
+
 }

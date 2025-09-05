@@ -1,18 +1,16 @@
-import {
-  TypeOrmModuleOptions,
-  TypeOrmModuleAsyncOptions,
-} from '@nestjs/typeorm';
+import { TypeOrmModuleOptions, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { User } from '../users/Student.entity';
 import { Bonding } from '../bonding/bonding-entity';
-import { Eligible } from '../erigible/erigibility-entity';
-import { University } from '../university/University.entity';
+import { Eligible } from 'src/erigible/erigibility-entity';
+import {University} from '../university/University.entity';
+
 
 // Async TypeORM configuration using environment variables
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
-    const dbPort = parseInt(process.env.PORT || '5432', 10);
-    const dbHost = process.env.DB_HOST || 'db.fenqtctwywobpnvdmpqp.supabase.co';
-    const dbUsername = process.env.USER || 'defaultUser';
+    const dbPort = parseInt(process.env.DB_PORT || '5433', 10);
+    const dbHost = process.env.DB_HOST || 'localhost';
+    const dbUsername = process.env.DB_USERNAME || 'defaultUser';
     const dbPassword = process.env.DB_PASSWORD || 'defaultPassword';
     const dbName = process.env.DB_NAME || 'defaultDB';
 
@@ -30,9 +28,10 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       },
       synchronize: true, // Be cautious with this in production; use migrations instead
       logging: false,
-      connectTimeoutMS: 30000,
+      connectTimeoutMS: 30000, 
     };
   },
 };
 
 // Static TypeORM configuration
+
