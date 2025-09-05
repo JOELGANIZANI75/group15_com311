@@ -26,11 +26,11 @@ const SignUp = () => {
       ...prevForm,
       [name]: type === 'checkbox' ? checked : value,
     }));
+    setErrorMessage(''); // Clear errors on change
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(''); // Reset error message
 
     if (form.password.length < 8) {
       setErrorMessage('Password must be at least 8 characters long.');
@@ -45,21 +45,35 @@ const SignUp = () => {
       return;
     }
 
-    setLoading(true); // Set loading state
+    setLoading(true);
     try {
-      await axios.post(`https://group15-com31.onrender.com/users/register`, form);
-      setShowSuccessModal(true); // Open modal on success
+      // Use HTTPS backend URL and include withCredentials if using cookies
+      const response = await axios.post(
+        'https://group15-com31.onrender.com/users/register',
+        form,
+        { withCredentials: true } // important if backend uses cookies
+      );
+
+      if (response.status === 201 || response.status === 200) {
+        setShowSuccessModal(true);
+      }
     } catch (error) {
       console.error('Error creating account', error);
-      setErrorMessage('Failed to create account: ' + (error.response?.data?.message || error.message));
+      if (error.response) {
+        setErrorMessage(error.response.data.message || 'Failed to create account.');
+      } else if (error.request) {
+        setErrorMessage('Network error: Unable to reach backend.');
+      } else {
+        setErrorMessage('Error: ' + error.message);
+      }
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="rounded-lg shadow-lg flex flex-col w-11/12 md:w-3/4 lg:w-2/3 p-8">
+    <div className="flex items-center justify-center h-screen bg-gray-50">
+      <div className="rounded-lg shadow-lg flex flex-col w-11/12 md:w-3/4 lg:w-2/3 p-8 bg-white">
         <div className="flex justify-center mb-4">
           <img src="/images/logo.png" alt="Platform Logo" className="h-24" />
         </div>
@@ -73,6 +87,7 @@ const SignUp = () => {
         {errorMessage && <p className="text-red-500 text-center mb-4">{errorMessage}</p>}
 
         <form onSubmit={handleSubmit} className="mt-4">
+          {/* Name Inputs */}
           <div className="grid grid-cols-2 gap-4 mb-4">
             <input
               type="text"
@@ -94,6 +109,7 @@ const SignUp = () => {
             />
           </div>
 
+          {/* RegNo and Email */}
           <div className="grid grid-cols-2 gap-4 mb-4">
             <input
               type="text"
@@ -115,6 +131,7 @@ const SignUp = () => {
             />
           </div>
 
+          {/* Passwords */}
           <div className="grid grid-cols-2 gap-4 mb-4 relative">
             <div className="relative">
               <input
@@ -128,7 +145,7 @@ const SignUp = () => {
               />
               <button
                 type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
+                onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-blue-600"
               >
                 {showPassword ? 'Hide' : 'Show'}
@@ -147,7 +164,7 @@ const SignUp = () => {
               />
               <button
                 type="button"
-                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-blue-600"
               >
                 {showConfirmPassword ? 'Hide' : 'Show'}
@@ -155,6 +172,7 @@ const SignUp = () => {
             </div>
           </div>
 
+          {/* University */}
           <div className="mb-4">
             <select
               name="University"
@@ -173,6 +191,7 @@ const SignUp = () => {
             </select>
           </div>
 
+          {/* Terms */}
           <div className="flex items-center mb-4">
             <input
               type="checkbox"
@@ -189,16 +208,17 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className={`w-full py-2 rounded transition duration-200 ${loading ? 'bg-gray-400' : 'bg-yellow-600 hover:bg-yellow-600'}`}
+            className={`w-full py-2 rounded transition duration-200 ${loading ? 'bg-gray-400' : 'bg-yellow-600 hover:bg-yellow-700'}`}
             disabled={loading}
           >
             {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
 
+        {/* Success Modal */}
         {showSuccessModal && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 shadow-lg w-1/2 transition-all ease-in-out duration-300 z-50">
+            <div className="bg-white rounded-lg p-6 shadow-lg w-1/2 z-50">
               <h3 className="text-lg font-semibold mb-4">Account Created Successfully!</h3>
               <p className="mb-4">Your account has been created. You can now log in.</p>
               <button
@@ -211,11 +231,7 @@ const SignUp = () => {
                 Go to Login
               </button>
             </div>
-            <div
-              className="fixed inset-0 bg-black opacity-50 z-40"
-              onClick={() => setShowSuccessModal(false)}
-              aria-hidden="true"
-            ></div>
+            <div className="fixed inset-0 bg-black opacity-50 z-40" onClick={() => setShowSuccessModal(false)}></div>
           </div>
         )}
       </div>
@@ -224,4 +240,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
