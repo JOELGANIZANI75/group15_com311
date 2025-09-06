@@ -33,7 +33,7 @@ const LoginForm = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post("https://group15-com31.onrender.com/auth/login", {
+      const response = await axios.post("${process.env.REACT_APP_API_URL}/auth/login", {
         email,
         password,
       });
@@ -147,4 +147,5 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
 
