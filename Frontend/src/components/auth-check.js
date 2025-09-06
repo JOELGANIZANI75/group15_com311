@@ -49,7 +49,7 @@ const SignUp = () => {
     try {
       // Use HTTPS backend URL and include withCredentials if using cookies
       const response = await axios.post(
-        'https://group15-com31.onrender.com/users/register',
+        '${process.env.REACT_APP_API_URL}/users/register',
         form,
         { withCredentials: true } // important if backend uses cookies
       );
@@ -240,3 +240,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
