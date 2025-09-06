@@ -10,7 +10,7 @@ const Axio = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://group15-com31.onrender.com/api/data`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/data`);
         if (isMounted) setData(response.data);
       } catch (err) {
         console.error("Error fetching data", err);
@@ -40,5 +40,6 @@ const Axio = () => {
 };
 
 export default Axio;
+
 
 
