@@ -56,7 +56,7 @@ const MyBonding = () => {
 
   const fetchBondingDetails = async () => {
     try {
-      const response = await axios.get(`https://group15-com31.onrender.com/bonding/user/${userId}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/bonding/user/${userId}`);
       const bondingData = response.data.length ? response.data[0] : null;
       setBonding(bondingData);
       setUniversity(bondingData?.university || {});
@@ -83,7 +83,7 @@ const MyBonding = () => {
       if (bonding.nationalIdFile) formData.append('nationalIdFile', bonding.nationalIdFile);
       if (bonding.studentIdFile) formData.append('studentIdFile', bonding.studentIdFile);
 
-      const response = await axios.put(`https://group15-com31.onrender.com/bonding/${bonding.id}`, bonding);
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/bonding/${bonding.id}`, bonding);
       console.log('Changes saved:', response.data);
       fetchBondingDetails();
       closeEditModal();
@@ -442,4 +442,5 @@ const MyBonding = () => {
 };
 
 export default MyBonding;
+
 
